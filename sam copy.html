@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        /* General Page Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Birthday Card Container */
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Header Banner */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #ff758c 0%, #ff7eb3 100%);
+        }
+
+        /* Typography */
+        h1 {
+            color: #ff4757;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #2f3542;
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+
+        p {
+            color: #57606f;
+            line-height: 1.6;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        /* Emoji Decor */
+        .emojis {
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+
+        /* Interactive Button */
+        .btn {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff6b81;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="emojis">🎂 🎉 🎈</div>
+        <h1>Happy Birthday!</h1>
+        
+        <!-- Change the name here -->
+        <h2>Dear [Friend's Name],</h2>
+        
+        <!-- Change your message here -->
+        <p>Wishing you a day filled with happiness and a year filled with joy. May all your dreams come true! Have an amazing celebration today!</p>
+        
+        <button class="btn" onclick="alert('Wishing you the absolute best! 🎁🎉')">Click for a Surprise!</button>
+    </div>
+
+</body>
+</html>

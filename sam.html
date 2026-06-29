@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Extraordinary Birthday!</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
+        body {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            perspective: 1000px;
+        }
+
+        /* Animated Background Gradient */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 50px;
+            width: 90%;
+            max-width: 550px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: floatUp 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Glowing Text */
+        .glow-text {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px #e73c7e, 0 0 30px #e73c7e;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        /* Hidden Message / Typewriter effect */
+        #hidden-message {
+            display: none;
+            color: #fff;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border-left: 5px solid #23d5ab;
+        }
+
+        /* Magical Button */
+        .magic-btn {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magic-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Confetti Elements */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            z-index: 100;
+            top: -10px;
+            border-radius: 0;
+            animation: fall linear forwards;
+        }
+
+        .confetti.circle {
+            border-radius: 50%;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Floating Background Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: float 10s infinite linear;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Generates floating orbs in the background -->
+    <div id="particles-container"></div>
+
+    <div class="glass-card">
+        <h1 class="glow-text">Happy Birthday!</h1>
+        <h2 class="subtitle">To someone truly spectacular.</h2>
+        
+        <button class="magic-btn" id="celebrateBtn">Tap to Celebrate 🎉</button>
+
+        <!-- Change your personal message here -->
+        <div id="hidden-message">
+            Wishing you a year filled with grand adventures, profound joy, and endless success. May every single day be as extraordinary as you are! Keep shining bright. ✨
+        </div>
+    </div>
+
+    <script>
+        // 1. Background Particles Animation
+        const particlesContainer = document.getElementById('particles-container');
+        for (let i = 0; i < 20; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.width = Math.random() * 50 + 20 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDuration = Math.random() * 10 + 5 + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // 2. Confetti Explosion Logic
+        const btn = document.getElementById('celebrateBtn');
+        const message = document.getElementById('hidden-message');
+
+        function createConfetti() {
+            const colors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#ff69b4', '#ffffff'];
+            
+            for (let i = 0; i < 150; i++) {
+                let confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Randomize shapes (squares and circles)
+                if (Math.random() > 0.5) confetti.classList.add('circle');
+                
+                // Randomize properties
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 15 + 5 + 'px';
+                
+                // Physics variations
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                
+                document.body.appendChild(confetti);
+
+                // Clean up DOM after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // 3. Button Click Event
+        btn.addEventListener('click', function() {
+            // Trigger Confetti
+            createConfetti();
+            
+            // Hide Button and Show Message
+            btn.style.display = 'none';
+            message.style.display = 'block';
+            
+            // Add a subtle pop animation to the message
+            message.animate([
+                { transform: 'scale(0.8)', opacity: 0 },
+                { transform: 'scale(1)', opacity: 1 }
+            ], {
+                duration: 500,
+                easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                fill: 'forwards'
+            });
+        });
+    </script>
+</body>
+</html>
